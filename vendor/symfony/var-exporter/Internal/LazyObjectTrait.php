@@ -11,16 +11,20 @@
 
 namespace Symfony\Component\VarExporter\Internal;
 
-/**
- * @author Nicolas Grekas <p@tchwork.com>
- *
- * @internal
- */
-class NamedClosure
-{
-    public function __construct(
-        public readonly array $callable,
-        public readonly ?\ReflectionMethod $method = null,
-    ) {
+if (\PHP_VERSION_ID >= 80300) {
+    /**
+     * @internal
+     */
+    trait LazyObjectTrait
+    {
+        private readonly LazyObjectState $lazyObjectState;
+    }
+} else {
+    /**
+     * @internal
+     */
+    trait LazyObjectTrait
+    {
+        private LazyObjectState $lazyObjectState;
     }
 }
