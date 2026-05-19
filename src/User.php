@@ -2,8 +2,8 @@
 // src/User.php
 
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Doctrine\ORM\Mapping as ORM;
+
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]
 class User
@@ -18,7 +18,10 @@ class User
     #[ORM\Column(type: 'string')]
     private string $name;
 
+    #[ORM\OneToMany(targetEntity: Bug::class, mappedBy: 'reporter')]
     private $reportedBugs = null;
+
+    #[ORM\OneToMany(targetEntity: Bug::class, mappedBy: 'engineer')]
     private $assignedBugs = null;
 
     public function __construct()
